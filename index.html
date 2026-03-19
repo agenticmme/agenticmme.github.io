@@ -351,40 +351,41 @@
       display: grid;
       grid-template-columns: 1.24fr 1fr;
       gap: 16px;
-      align-items: stretch;
+      align-items: start;
     }
 
     .results-grid > .figure-card,
     .results-grid > .result-panel {
       margin-top: 0;
-      height: 100%;
     }
 
     .result-panel {
       background: #fff;
       border: 1px solid var(--border-color);
       border-radius: 12px;
-      padding: 16px;
+      padding: 18px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
+      gap: 14px;
     }
 
     .result-list {
       margin: 0;
       padding-left: 1.05rem;
       color: var(--secondary-color);
-      font-size: 0.93rem;
+      font-size: 0.95rem;
+      line-height: 1.62;
     }
 
-    .result-list li + li { margin-top: 8px; }
+    .result-list li + li { margin-top: 10px; }
     .result-list strong { color: var(--primary-color); }
 
     .mini-stats {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      margin-top: 12px;
+      margin-top: 2px;
     }
 
     .mini-stat {
@@ -643,7 +644,7 @@
       <h2 class="section-title">Citation</h2>
       <div class="citation-block"><code>@misc{agenticmme2026,
   title   = {Agentic-MME: What Agentic Capability Really Brings to Multimodal Intelligence?},
-  author  = {Anonymous ECCV 2026 Submission},
+  author  = {Qianshan Wei and Yishan Yang and Siyi Wang and Jinglin Chen and Binyu Wang and Jiaming Wang and Shuang Chen and Zechen Li and Yang Shi and Yuqi Tang and Weining Wang and Yi Yu and Chaoyou Fu and Qi Li and Yi-Fan Zhang},
   year    = {2026},
   note    = {Process-verified benchmark for multimodal agentic capability}
 }</code></div>
