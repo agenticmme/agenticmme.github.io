@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agentic-MME: What Agentic Capability Really Brings to Multimodal Intelligence?</title>
+  <style>
+    :root {
+      --primary-color: #1a1a2e;
+      --secondary-color: #6b7280;
+      --accent-color: #6366f1;
+      --accent-light: #818cf8;
+      --bg-color: #ffffff;
+      --bg-secondary: #f8fafc;
+      --border-color: #e5e7eb;
+      --success-color: #10b981;
+      --warning-color: #f59e0b;
+      --danger-color: #ef4444;
+      --max-width: 1120px;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-main);
+      color: var(--primary-color);
+      background: var(--bg-color);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .nav-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .logo {
+      color: white;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .logo-badge {
+      background: linear-gradient(135deg, var(--accent-color), var(--accent-light));
+      border-radius: 7px;
+      padding: 4px 11px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.86);
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 8px 14px;
+      border-radius: 7px;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 50%, #3b3b5c 100%);
+      color: white;
+      padding: 74px 24px 64px;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 940px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3.3rem);
+      font-weight: 800;
+      line-height: 1.16;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero .subtitle {
+      color: rgba(255, 255, 255, 0.86);
+      max-width: 860px;
+      margin: 0 auto;
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+    }
+
+    .hero-stats {
+      margin: 34px auto 0;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(130px, 1fr));
+      gap: 14px;
+      max-width: 860px;
+    }
+
+    .stat-item {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 14px 12px;
+    }
+
+    .stat-number {
+      font-size: 1.9rem;
+      font-weight: 800;
+      line-height: 1;
+      background: linear-gradient(135deg, #c4b5fd, #93c5fd);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .stat-label {
+      margin-top: 6px;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 0.85rem;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 9px;
+      font-weight: 600;
+      font-size: 0.93rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--accent-color), var(--accent-light));
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-secondary {
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .btn-secondary:hover { background: rgba(255, 255, 255, 0.16); }
+
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 42px 24px 64px;
+    }
+
+    section {
+      margin-bottom: 48px;
+      scroll-margin-top: 88px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 18px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-subtitle {
+      font-size: 1.03rem;
+      color: var(--secondary-color);
+      margin-bottom: 20px;
+    }
+
+    .paper-note {
+      background: linear-gradient(135deg, #eef2ff, #f5f3ff);
+      border: 1px solid #dbeafe;
+      border-radius: 12px;
+      padding: 18px 20px;
+      font-size: 0.95rem;
+    }
+
+    .paper-note strong { color: #312e81; }
+
+    .figure-card {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+      margin-top: 22px;
+    }
+
+    .figure-card img {
+      width: 100%;
+      display: block;
+    }
+
+    .figure-body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      background: #fff;
+    }
+
+    .figure-body img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      max-width: 100%;
+    }
+
+    .figure-body.tall-guard img {
+      max-height: 620px;
+      width: auto;
+    }
+
+    .figure-body.main-focus img {
+      max-height: 700px;
+      width: auto;
+    }
+
+    .figure-body.sub-focus img {
+      max-height: 500px;
+      width: auto;
+    }
+
+    .figure-caption {
+      padding: 14px 16px;
+      font-size: 0.9rem;
+      color: var(--secondary-color);
+      border-top: 1px solid var(--border-color);
+      background: var(--bg-secondary);
+    }
+
+    .level-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .level-card {
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      background: #fff;
+    }
+
+    .level-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .level-1 { background: linear-gradient(135deg, #10b981, #34d399); }
+    .level-2 { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+    .level-3 { background: linear-gradient(135deg, #ef4444, #f87171); }
+
+    .level-card h4 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .level-card p {
+      font-size: 0.92rem;
+      color: var(--secondary-color);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .axis-card {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .axis-card h4 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .axis-card p {
+      font-size: 0.92rem;
+      color: var(--secondary-color);
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1.24fr 1fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .results-grid > .figure-card,
+    .results-grid > .result-panel {
+      margin-top: 0;
+      height: 100%;
+    }
+
+    .result-panel {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .result-list {
+      margin: 0;
+      padding-left: 1.05rem;
+      color: var(--secondary-color);
+      font-size: 0.93rem;
+    }
+
+    .result-list li + li { margin-top: 8px; }
+    .result-list strong { color: var(--primary-color); }
+
+    .mini-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .mini-stat {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .mini-stat .n {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #4338ca;
+      line-height: 1;
+    }
+
+    .mini-stat .t {
+      margin-top: 4px;
+      font-size: 0.8rem;
+      color: var(--secondary-color);
+    }
+
+    .secondary-figure {
+      width: 100%;
+      max-width: none;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .info-card {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .info-card h5 {
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+
+    .info-card p {
+      font-size: 0.9rem;
+      color: var(--secondary-color);
+    }
+
+    .citation-block {
+      background: #1a1a2e;
+      border-radius: 12px;
+      color: #e5e7eb;
+      padding: 20px;
+      overflow-x: auto;
+      font-family: Menlo, Monaco, Consolas, monospace;
+      font-size: 0.84rem;
+      line-height: 1.58;
+    }
+
+    .citation-block code {
+      color: #c4b5fd;
+      white-space: pre;
+    }
+
+    footer {
+      margin-top: 14px;
+      padding: 28px 24px 34px;
+      border-top: 1px solid var(--border-color);
+      background: var(--bg-secondary);
+      color: var(--secondary-color);
+      text-align: center;
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero-stats { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+      .level-grid, .cards-grid { grid-template-columns: 1fr 1fr; }
+      .results-grid, .two-col { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+      .hero { padding-top: 62px; }
+      .level-grid, .cards-grid { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+      .section-title { font-size: 1.65rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <a class="logo" href="#top">
+        <span class="logo-badge">Benchmark</span>
+        <span>Agentic-MME</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#design">Design</a>
+        <a href="#results">Results</a>
+        <a href="#dataset">Dataset</a>
+        <a href="#citation">Citation</a>
+      </nav>
+    </div>
+  </header>
+
+  <section id="top" class="hero">
+    <div class="hero-content">
+      <h1><span class="highlight">Agentic-MME</span><br>What Agentic Capability Really Brings to Multimodal Intelligence?</h1>
+      <p class="subtitle">A process-verified benchmark for multimodal agentic capabilities, jointly evaluating visual tool use and web knowledge expansion with stepwise auditing.</p>
+
+      <div class="hero-stats">
+        <div class="stat-item"><div class="stat-number">418</div><div class="stat-label">Real-World Tasks</div></div>
+        <div class="stat-item"><div class="stat-number">6</div><div class="stat-label">Domains</div></div>
+        <div class="stat-item"><div class="stat-number">3</div><div class="stat-label">Difficulty Levels</div></div>
+        <div class="stat-item"><div class="stat-number">2000+</div><div class="stat-label">Stepwise Checkpoints</div></div>
+      </div>
+
+      <div class="button-group">
+        <a class="btn btn-primary" href="./Agentic-MME_ECCV2026.pdf" target="_blank" rel="noopener noreferrer">📄 Paper PDF</a>
+        <a class="btn btn-secondary" href="#results">📊 Main Results</a>
+        <a class="btn btn-secondary" href="#citation">🧾 Citation</a>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section id="overview">
+      <h2 class="section-title">Overview</h2>
+      <p class="section-subtitle">Multimodal LLMs are shifting from passive observers to active investigators. Agentic-MME evaluates whether they can manipulate visual evidence and retrieve external knowledge in a coherent, efficient workflow.</p>
+
+      <div class="paper-note">
+        <strong>Abstract (short).</strong> Existing benchmarks often separate visual tools and web search, and mostly score final answers. Agentic-MME introduces a unified process-verifiable setup with human-annotated trajectories, dual-axis evaluation (S-axis for strategy/search and V-axis for visual evidence), and overthinking-based efficiency diagnostics.
+      </div>
+
+      <figure class="figure-card">
+        <div class="figure-body">
+          <img src="assets/case.png" alt="Case studies in Agentic-MME">
+        </div>
+        <figcaption class="figure-caption">Case studies across Level-1/2/3 tasks: from isolated visual operations to deeply coupled multi-round visual and knowledge workflows.</figcaption>
+      </figure>
+    </section>
+
+    <section id="design">
+      <h2 class="section-title">Benchmark Design</h2>
+      <p class="section-subtitle">Tasks are organized by interaction complexity, from single-step visual operations to tightly interleaved visual-search reasoning.</p>
+
+      <div class="level-grid">
+        <div class="level-card">
+          <span class="level-chip level-1">Level 1</span>
+          <h4>Visual Expansion Focus</h4>
+          <p>Single decisive visual action (crop/rotate/enhance) to recover target evidence.</p>
+        </div>
+        <div class="level-card">
+          <span class="level-chip level-2">Level 2</span>
+          <h4>Visual + Knowledge</h4>
+          <p>Short multi-step workflows combining image operations and web retrieval.</p>
+        </div>
+        <div class="level-card">
+          <span class="level-chip level-3">Level 3</span>
+          <h4>Synergistic Coupling</h4>
+          <p>Iterative hypothesis-verification loops requiring interleaved visual and search reasoning.</p>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="axis-card">
+          <h4>S-axis: Knowledge Expansion</h4>
+          <p>Audits search strategy, retrieval quality, and correctness of intermediate answers via checkpointed trajectory matching.</p>
+        </div>
+        <div class="axis-card">
+          <h4>V-axis: Visual Expansion</h4>
+          <p>Audits tool invocation correctness and whether generated visual artifacts genuinely expose required evidence.</p>
+        </div>
+      </div>
+
+      <figure class="figure-card">
+        <div class="figure-body">
+          <img src="assets/datapipe.png" alt="Data pipeline">
+        </div>
+        <figcaption class="figure-caption">Annotation and evaluation pipeline with standardized execution harness for code and API-based tool modes.</figcaption>
+      </figure>
+    </section>
+
+    <section id="results">
+      <h2 class="section-title">Main Results</h2>
+      <p class="section-subtitle">State-of-the-art models still struggle on long-horizon multimodal agentic reasoning, especially in Level-3 tasks.</p>
+
+      <div class="results-grid">
+        <figure class="figure-card">
+          <div class="figure-body main-focus">
+            <img src="assets/main_results_table.png" alt="Main benchmark results table">
+          </div>
+          <figcaption class="figure-caption">Main benchmark performance (Table 3 in paper): overall and per-level results across closed-source and open-source models.</figcaption>
+        </figure>
+
+        <div class="result-panel">
+          <ul class="result-list">
+            <li><strong>Best overall:</strong> Gemini 3-pro reaches <strong>56.3%</strong> accuracy.</li>
+            <li><strong>Hard split drop:</strong> performance falls to <strong>33.3%</strong> on Level-3.</li>
+            <li><strong>Observation:</strong> broad knowledge does not imply reliable planning + execution.</li>
+            <li><strong>Diagnostic value:</strong> process-level auditing pinpoints failure sources hidden by final-answer-only metrics.</li>
+          </ul>
+
+          <div class="mini-stats">
+            <div class="mini-stat"><div class="n">56.3%</div><div class="t">Best Overall</div></div>
+            <div class="mini-stat"><div class="n">33.3%</div><div class="t">Best on Level-3</div></div>
+            <div class="mini-stat"><div class="n">13</div><div class="t">Visual Tools</div></div>
+            <div class="mini-stat"><div class="n">4</div><div class="t">Web Tools</div></div>
+          </div>
+        </div>
+      </div>
+
+      <figure class="figure-card secondary-figure">
+        <div class="figure-body sub-focus">
+          <img src="assets/error_heatmap.png" alt="Error heatmap">
+        </div>
+        <figcaption class="figure-caption">Fine-grained error analysis across difficulty levels and failure types.</figcaption>
+      </figure>
+    </section>
+
+    <section id="dataset">
+      <h2 class="section-title">Dataset and Annotation</h2>
+      <p class="section-subtitle">Agentic-MME emphasizes human-supervised process labels to support robust and explainable benchmark diagnostics.</p>
+
+      <div class="cards-grid">
+        <div class="info-card">
+          <h5>Task Scope</h5>
+          <p>418 real-world tasks across six domains with progressive interaction complexity.</p>
+        </div>
+        <div class="info-card">
+          <h5>Process Labels</h5>
+          <p>2000+ stepwise checkpoints with human reference trajectories and expected intermediate states.</p>
+        </div>
+        <div class="info-card">
+          <h5>Human Effort</h5>
+          <p>On average 10+ person-hours of annotation and verification per task.</p>
+        </div>
+      </div>
+
+      <figure class="figure-card">
+        <div class="figure-body tall-guard">
+          <img src="assets/data.png" alt="Dataset statistics">
+        </div>
+        <figcaption class="figure-caption">Dataset statistics: domains, levels, checkpoints, tool usage, and evidence distribution.</figcaption>
+      </figure>
+    </section>
+
+    <section id="citation">
+      <h2 class="section-title">Citation</h2>
+      <div class="citation-block"><code>@misc{agenticmme2026,
+  title   = {Agentic-MME: What Agentic Capability Really Brings to Multimodal Intelligence?},
+  author  = {Anonymous ECCV 2026 Submission},
+  year    = {2026},
+  note    = {Process-verified benchmark for multimodal agentic capability}
+}</code></div>
+    </section>
+  </main>
+
+  <footer>
+    Agentic-MME Project Page • Standalone website package
+  </footer>
+
+  <script>
+    const sections = [...document.querySelectorAll('main section')];
+    const navLinks = [...document.querySelectorAll('.nav-links a')];
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const id = entry.target.id;
+        navLinks.forEach((link) => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      });
+    }, { rootMargin: '-40% 0px -50% 0px' });
+
+    sections.forEach((section) => observer.observe(section));
+  </script>
+</body>
+</html>
