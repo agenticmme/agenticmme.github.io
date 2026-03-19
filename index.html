@@ -351,61 +351,62 @@
       display: grid;
       grid-template-columns: 1.24fr 1fr;
       gap: 16px;
-      align-items: start;
+      align-items: stretch;
     }
 
     .results-grid > .figure-card,
     .results-grid > .result-panel {
       margin-top: 0;
+      height: 100%;
     }
 
     .result-panel {
       background: #fff;
       border: 1px solid var(--border-color);
       border-radius: 12px;
-      padding: 18px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      gap: 14px;
+      gap: 16px;
     }
 
     .result-list {
       margin: 0;
       padding-left: 1.05rem;
       color: var(--secondary-color);
-      font-size: 0.95rem;
-      line-height: 1.62;
+      font-size: 1.02rem;
+      line-height: 1.74;
     }
 
-    .result-list li + li { margin-top: 10px; }
+    .result-list li + li { margin-top: 12px; }
     .result-list strong { color: var(--primary-color); }
 
     .mini-stats {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 2px;
+      gap: 12px;
+      margin-top: 6px;
     }
 
     .mini-stat {
       background: var(--bg-secondary);
       border: 1px solid var(--border-color);
       border-radius: 10px;
-      padding: 12px;
+      padding: 14px;
       text-align: center;
     }
 
     .mini-stat .n {
-      font-size: 1.5rem;
+      font-size: 1.62rem;
       font-weight: 800;
       color: #4338ca;
       line-height: 1;
     }
 
     .mini-stat .t {
-      margin-top: 4px;
-      font-size: 0.8rem;
+      margin-top: 6px;
+      font-size: 0.88rem;
       color: var(--secondary-color);
     }
 
@@ -644,7 +645,7 @@
       <h2 class="section-title">Citation</h2>
       <div class="citation-block"><code>@misc{agenticmme2026,
   title   = {Agentic-MME: What Agentic Capability Really Brings to Multimodal Intelligence?},
-  author  = {Qianshan Wei and Yishan Yang and Siyi Wang and Jinglin Chen and Binyu Wang and Jiaming Wang and Shuang Chen and Zechen Li and Yang Shi and Yuqi Tang and Weining Wang and Yi Yu and Chaoyou Fu and Qi Li and Yi-Fan Zhang},
+  author  = {Qianshan Wei, Yishan Yang, Siyi Wang, Jinglin Chen, Binyu Wang, Jiaming Wang, Shuang Chen, Zechen Li, Yang Shi, Yuqi Tang, Weining Wang, Yi Yu, Chaoyou Fu, Qi Li, Yi-Fan Zhang},
   year    = {2026},
   note    = {Process-verified benchmark for multimodal agentic capability}
 }</code></div>
