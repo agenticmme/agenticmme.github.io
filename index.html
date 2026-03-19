@@ -266,7 +266,7 @@
     }
 
     .figure-body.main-focus img {
-      max-height: 700px;
+      max-height: 640px;
       width: auto;
     }
 
@@ -349,7 +349,7 @@
 
     .results-grid {
       display: grid;
-      grid-template-columns: 1.24fr 1fr;
+      grid-template-columns: 1.12fr 1fr;
       gap: 16px;
       align-items: stretch;
     }
@@ -364,29 +364,29 @@
       background: #fff;
       border: 1px solid var(--border-color);
       border-radius: 12px;
-      padding: 20px;
+      padding: 18px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      gap: 16px;
+      gap: 14px;
     }
 
     .result-list {
       margin: 0;
       padding-left: 1.05rem;
       color: var(--secondary-color);
-      font-size: 1.02rem;
-      line-height: 1.74;
+      font-size: 0.98rem;
+      line-height: 1.68;
     }
 
-    .result-list li + li { margin-top: 12px; }
+    .result-list li + li { margin-top: 10px; }
     .result-list strong { color: var(--primary-color); }
 
     .mini-stats {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
-      margin-top: 6px;
+      margin-top: auto;
     }
 
     .mini-stat {
@@ -409,6 +409,8 @@
       font-size: 0.88rem;
       color: var(--secondary-color);
     }
+
+    .nowrap { white-space: nowrap; }
 
     .secondary-figure {
       width: 100%;
@@ -592,7 +594,7 @@
         <div class="result-panel">
           <ul class="result-list">
             <li><strong>Best overall:</strong> Gemini 3-pro reaches <strong>56.3%</strong> accuracy.</li>
-            <li><strong>Hard split drop:</strong> performance falls to <strong>33.3%</strong> on Level-3.</li>
+            <li><strong>Hard split drop:</strong> performance falls to <strong>33.3%</strong> on <span class="nowrap">Level&#8209;3</span>.</li>
             <li><strong>Observation:</strong> broad knowledge does not imply reliable planning + execution.</li>
             <li><strong>Diagnostic value:</strong> process-level auditing pinpoints failure sources hidden by final-answer-only metrics.</li>
           </ul>
@@ -645,7 +647,7 @@
       <h2 class="section-title">Citation</h2>
       <div class="citation-block"><code>@misc{agenticmme2026,
   title   = {Agentic-MME: What Agentic Capability Really Brings to Multimodal Intelligence?},
-  author  = {Qianshan Wei, Yishan Yang, Siyi Wang, Jinglin Chen, Binyu Wang, Jiaming Wang, Shuang Chen, Zechen Li, Yang Shi, Yuqi Tang, Weining Wang, Yi Yu, Chaoyou Fu, Qi Li, Yi-Fan Zhang},
+  author  = {Wei, Qianshan and Yang, Yishan and Wang, Siyi and Chen, Jinglin and Wang, Binyu and Wang, Jiaming and Chen, Shuang and Li, Zechen and Shi, Yang and Tang, Yuqi and Wang, Weining and Yu, Yi and Fu, Chaoyou and Li, Qi and Zhang, Yi-Fan},
   year    = {2026},
   note    = {Process-verified benchmark for multimodal agentic capability}
 }</code></div>
