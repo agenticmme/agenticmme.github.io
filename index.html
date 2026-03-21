@@ -613,7 +613,7 @@
 
     .case-grid {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 14px;
     }
 
@@ -629,7 +629,7 @@
 
     .case-image-wrap {
       width: 100%;
-      height: clamp(360px, 52vw, 620px);
+      height: clamp(280px, 30vw, 420px);
       background: #f8fafc;
       overflow: hidden;
       border-bottom: 1px solid var(--border-color);
@@ -711,29 +711,86 @@
       align-items: center;
       justify-content: center;
       z-index: 2000;
-      padding: 28px;
-      cursor: zoom-out;
+      padding: 24px;
+      cursor: default;
     }
 
     .case-lightbox.open {
       display: flex;
     }
 
-    .case-lightbox img {
-      max-width: min(94vw, 1800px);
-      max-height: 92vh;
+    .case-lightbox-view {
+      position: relative;
+      width: min(94vw, 1800px);
+      height: min(90vh, 1200px);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+    }
+
+    .case-lightbox-stage {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      cursor: grab;
+      touch-action: none;
+    }
+
+    .case-lightbox-stage.dragging {
+      cursor: grabbing;
+    }
+
+    .case-lightbox-img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      max-width: none;
+      max-height: none;
       width: auto;
       height: auto;
-      object-fit: contain;
-      border-radius: 8px;
-      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+      user-select: none;
+      -webkit-user-drag: none;
+      will-change: transform;
+      transform-origin: 0 0;
+      image-rendering: auto;
       background: #fff;
+      border-radius: 8px;
+    }
+
+    .case-lightbox-toolbar {
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      z-index: 3;
+      display: inline-flex;
+      gap: 8px;
+    }
+
+    .case-lightbox-btn {
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      background: rgba(15, 23, 42, 0.72);
+      color: #fff;
+      border-radius: 8px;
+      min-width: 32px;
+      height: 32px;
+      padding: 0 10px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      line-height: 32px;
+    }
+
+    .case-lightbox-btn:hover {
+      background: rgba(30, 41, 59, 0.9);
     }
 
     .case-lightbox-close {
       position: absolute;
       right: 20px;
       top: 16px;
+      z-index: 3;
       width: 34px;
       height: 34px;
       border-radius: 999px;
@@ -1033,8 +1090,17 @@
   </main>
 
   <div class="case-lightbox" id="caseLightbox" aria-hidden="true">
-    <button type="button" class="case-lightbox-close" id="caseLightboxClose" aria-label="Close">×</button>
-    <img id="caseLightboxImg" alt="Case preview">
+    <div class="case-lightbox-view" id="caseLightboxView">
+      <div class="case-lightbox-toolbar">
+        <button type="button" class="case-lightbox-btn" id="caseZoomOut" aria-label="Zoom out">−</button>
+        <button type="button" class="case-lightbox-btn" id="caseZoomIn" aria-label="Zoom in">+</button>
+        <button type="button" class="case-lightbox-btn" id="caseZoomReset" aria-label="Reset zoom">Reset</button>
+      </div>
+      <button type="button" class="case-lightbox-close" id="caseLightboxClose" aria-label="Close">×</button>
+      <div class="case-lightbox-stage" id="caseLightboxStage">
+        <img id="caseLightboxImg" class="case-lightbox-img" alt="Case preview">
+      </div>
+    </div>
   </div>
 
   <footer>
@@ -1210,9 +1276,23 @@
     const caseGrid = document.getElementById('caseGrid');
     const caseFilterButtons = [...document.querySelectorAll('#caseFilter button')];
     const caseLightbox = document.getElementById('caseLightbox');
+    const caseLightboxStage = document.getElementById('caseLightboxStage');
     const caseLightboxImg = document.getElementById('caseLightboxImg');
     const caseLightboxClose = document.getElementById('caseLightboxClose');
+    const caseZoomIn = document.getElementById('caseZoomIn');
+    const caseZoomOut = document.getElementById('caseZoomOut');
+    const caseZoomReset = document.getElementById('caseZoomReset');
     let currentCaseLevel = 'all';
+    let lbScale = 1;
+    let lbMinScale = 1;
+    let lbMaxScale = 8;
+    let lbX = 0;
+    let lbY = 0;
+    let imgNaturalW = 0;
+    let imgNaturalH = 0;
+    let dragging = false;
+    let dragOffsetX = 0;
+    let dragOffsetY = 0;
 
     function renderCases() {
       const rows = caseData.filter((row) => (currentCaseLevel === 'all' ? true : String(row.level) === currentCaseLevel));
@@ -1247,6 +1327,68 @@
       });
     });
 
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
+
+    function applyLightboxTransform() {
+      const stageW = caseLightboxStage.clientWidth;
+      const stageH = caseLightboxStage.clientHeight;
+      const displayW = imgNaturalW * lbScale;
+      const displayH = imgNaturalH * lbScale;
+
+      if (displayW <= stageW) {
+        lbX = (stageW - displayW) / 2;
+      } else {
+        lbX = clamp(lbX, stageW - displayW, 0);
+      }
+
+      if (displayH <= stageH) {
+        lbY = (stageH - displayH) / 2;
+      } else {
+        lbY = clamp(lbY, stageH - displayH, 0);
+      }
+
+      caseLightboxImg.style.transform = `translate(${lbX}px, ${lbY}px) scale(${lbScale})`;
+    }
+
+    function fitLightboxImage(resetScale = true) {
+      if (!imgNaturalW || !imgNaturalH) return;
+      const stageW = caseLightboxStage.clientWidth;
+      const stageH = caseLightboxStage.clientHeight;
+      if (!stageW || !stageH) return;
+
+      const fitScale = Math.min(stageW / imgNaturalW, stageH / imgNaturalH);
+      lbMinScale = Math.max(fitScale, 0.08);
+      lbMaxScale = Math.max(lbMinScale * 8, 8);
+
+      if (resetScale) {
+        lbScale = lbMinScale;
+      } else {
+        lbScale = clamp(lbScale, lbMinScale, lbMaxScale);
+      }
+
+      caseLightboxImg.style.width = `${imgNaturalW}px`;
+      caseLightboxImg.style.height = `${imgNaturalH}px`;
+      applyLightboxTransform();
+    }
+
+    function zoomAt(factor, centerX, centerY) {
+      const prevScale = lbScale;
+      const nextScale = clamp(prevScale * factor, lbMinScale, lbMaxScale);
+      if (nextScale === prevScale) return;
+      lbX = centerX - ((centerX - lbX) * (nextScale / prevScale));
+      lbY = centerY - ((centerY - lbY) * (nextScale / prevScale));
+      lbScale = nextScale;
+      applyLightboxTransform();
+    }
+
+    function zoomFromCenter(factor) {
+      const centerX = caseLightboxStage.clientWidth / 2;
+      const centerY = caseLightboxStage.clientHeight / 2;
+      zoomAt(factor, centerX, centerY);
+    }
+
     caseGrid.addEventListener('click', (event) => {
       const image = event.target.closest('.case-image-wrap img');
       if (!image) return;
@@ -1256,10 +1398,58 @@
       caseLightbox.setAttribute('aria-hidden', 'false');
     });
 
+    caseLightboxImg.addEventListener('load', () => {
+      imgNaturalW = caseLightboxImg.naturalWidth || 1;
+      imgNaturalH = caseLightboxImg.naturalHeight || 1;
+      fitLightboxImage(true);
+    });
+
+    caseLightboxStage.addEventListener('wheel', (event) => {
+      if (!caseLightbox.classList.contains('open')) return;
+      event.preventDefault();
+      const rect = caseLightboxStage.getBoundingClientRect();
+      const centerX = event.clientX - rect.left;
+      const centerY = event.clientY - rect.top;
+      zoomAt(event.deltaY < 0 ? 1.12 : 0.88, centerX, centerY);
+    }, { passive: false });
+
+    caseLightboxStage.addEventListener('mousedown', (event) => {
+      if (lbScale <= lbMinScale + 1e-4) return;
+      dragging = true;
+      dragOffsetX = event.clientX - lbX;
+      dragOffsetY = event.clientY - lbY;
+      caseLightboxStage.classList.add('dragging');
+      event.preventDefault();
+    });
+
+    window.addEventListener('mousemove', (event) => {
+      if (!dragging) return;
+      lbX = event.clientX - dragOffsetX;
+      lbY = event.clientY - dragOffsetY;
+      applyLightboxTransform();
+    });
+
+    window.addEventListener('mouseup', () => {
+      dragging = false;
+      caseLightboxStage.classList.remove('dragging');
+    });
+
+    caseLightboxStage.addEventListener('dblclick', (event) => {
+      const rect = caseLightboxStage.getBoundingClientRect();
+      zoomAt(1.6, event.clientX - rect.left, event.clientY - rect.top);
+    });
+
+    caseZoomIn.addEventListener('click', () => zoomFromCenter(1.2));
+    caseZoomOut.addEventListener('click', () => zoomFromCenter(0.83));
+    caseZoomReset.addEventListener('click', () => fitLightboxImage(true));
+
     function closeCaseLightbox() {
+      dragging = false;
+      caseLightboxStage.classList.remove('dragging');
       caseLightbox.classList.remove('open');
       caseLightbox.setAttribute('aria-hidden', 'true');
-      caseLightboxImg.src = '';
+      caseLightboxImg.removeAttribute('src');
+      caseLightboxImg.style.transform = '';
     }
 
     caseLightboxClose.addEventListener('click', closeCaseLightbox);
@@ -1270,6 +1460,9 @@
       if (event.key === 'Escape' && caseLightbox.classList.contains('open')) {
         closeCaseLightbox();
       }
+    });
+    window.addEventListener('resize', () => {
+      if (caseLightbox.classList.contains('open')) fitLightboxImage(false);
     });
 
     renderLeaderboard();
