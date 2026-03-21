@@ -1304,7 +1304,7 @@
       caseGrid.innerHTML = rows.map((row) => `
         <article class="case-card">
           <div class="case-image-wrap">
-            <img src="${row.image}" alt="${row.title}">
+            <img src="${row.image}" alt="${row.title}" loading="lazy" decoding="async">
           </div>
           <div class="case-body">
             <div class="case-top">
