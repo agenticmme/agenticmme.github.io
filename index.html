@@ -447,6 +447,263 @@
       color: var(--secondary-color);
     }
 
+    .lb-note {
+      margin-top: -4px;
+      margin-bottom: 12px;
+      font-size: 0.92rem;
+      color: var(--secondary-color);
+    }
+
+    .lb-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 16px 0 14px;
+      align-items: end;
+    }
+
+    .lb-control {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      min-width: 148px;
+    }
+
+    .lb-control label {
+      font-size: 0.8rem;
+      color: var(--secondary-color);
+      font-weight: 600;
+    }
+
+    .lb-control select {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 0.9rem;
+      color: var(--primary-color);
+      background: #fff;
+    }
+
+    .lb-table-wrap {
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: auto;
+      background: #fff;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+    }
+
+    .lb-table {
+      width: 100%;
+      min-width: 920px;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .lb-table thead th {
+      background: #f8fafc;
+      color: #4b5563;
+      font-weight: 700;
+      text-align: right;
+      border-bottom: 1px solid var(--border-color);
+      padding: 11px 12px;
+      white-space: nowrap;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .lb-table thead th:first-child,
+    .lb-table thead th:nth-child(2),
+    .lb-table thead th:nth-child(3),
+    .lb-table tbody td:first-child,
+    .lb-table tbody td:nth-child(2),
+    .lb-table tbody td:nth-child(3) {
+      text-align: left;
+    }
+
+    .lb-table tbody tr {
+      border-bottom: 1px solid #edf2f7;
+    }
+
+    .lb-table tbody tr:last-child {
+      border-bottom: 0;
+    }
+
+    .lb-table tbody tr:hover {
+      background: #f9fafb;
+    }
+
+    .lb-table tbody td {
+      padding: 10px 12px;
+      color: #111827;
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .lb-table .muted {
+      color: #9ca3af;
+    }
+
+    .mode-pill,
+    .cat-pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 0.74rem;
+      line-height: 1.3;
+      font-weight: 700;
+    }
+
+    .mode-pill {
+      background: #eef2ff;
+      color: #4338ca;
+    }
+
+    .mode-pill.mode-none {
+      background: #f3f4f6;
+      color: #4b5563;
+    }
+
+    .cat-pill.cat-human {
+      background: #ecfeff;
+      color: #155e75;
+    }
+
+    .cat-pill.cat-no-tool {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .cat-pill.cat-open {
+      background: #e0f2fe;
+      color: #075985;
+    }
+
+    .cat-pill.cat-closed {
+      background: #ede9fe;
+      color: #5b21b6;
+    }
+
+    .case-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 18px;
+    }
+
+    .case-filter button {
+      border: 1px solid var(--border-color);
+      background: #fff;
+      color: #374151;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 7px 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .case-filter button:hover {
+      background: #f8fafc;
+    }
+
+    .case-filter button.active {
+      color: #fff;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--accent-color), var(--accent-light));
+      box-shadow: 0 6px 14px rgba(99, 102, 241, 0.28);
+    }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .case-card {
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    }
+
+    .case-image-wrap {
+      width: 100%;
+      height: 210px;
+      background: #f8fafc;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .case-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .case-body {
+      padding: 12px 13px 13px;
+    }
+
+    .case-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 7px;
+    }
+
+    .case-level {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: 0.73rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .case-level.level-1 { background: linear-gradient(135deg, #10b981, #34d399); }
+    .case-level.level-2 { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+    .case-level.level-3 { background: linear-gradient(135deg, #ef4444, #f87171); }
+
+    .case-id {
+      color: #9ca3af;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .case-title {
+      font-size: 0.98rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      line-height: 1.45;
+      color: #111827;
+    }
+
+    .case-desc {
+      font-size: 0.88rem;
+      line-height: 1.56;
+      color: #6b7280;
+    }
+
+    .case-empty {
+      border: 1px dashed var(--border-color);
+      border-radius: 12px;
+      padding: 18px;
+      color: var(--secondary-color);
+      text-align: center;
+      font-size: 0.92rem;
+      grid-column: 1 / -1;
+    }
+
     .citation-block {
       background: #1a1a2e;
       border-radius: 12px;
@@ -477,6 +734,7 @@
       .hero-stats { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
       .level-grid, .cards-grid { grid-template-columns: 1fr 1fr; }
       .results-grid, .two-col { grid-template-columns: 1fr; }
+      .case-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 700px) {
@@ -499,6 +757,8 @@
         <a href="#overview">Overview</a>
         <a href="#design">Design</a>
         <a href="#results">Results</a>
+        <a href="#leaderboard">Leaderboard</a>
+        <a href="#cases">Cases</a>
         <a href="#dataset">Dataset</a>
         <a href="#citation">Citation</a>
       </nav>
@@ -519,7 +779,8 @@
 
       <div class="button-group">
         <a class="btn btn-primary" href="./Agentic-MME_ECCV2026.pdf" target="_blank" rel="noopener noreferrer">📄 Paper PDF</a>
-        <a class="btn btn-secondary" href="#results">📊 Main Results</a>
+        <a class="btn btn-secondary" href="#leaderboard">🏆 Leaderboard</a>
+        <a class="btn btn-secondary" href="#cases">🖼️ Cases</a>
         <a class="btn btn-secondary" href="#citation">🧾 Citation</a>
       </div>
     </div>
@@ -620,6 +881,78 @@
       </figure>
     </section>
 
+    <section id="leaderboard">
+      <h2 class="section-title">Leaderboard</h2>
+      <p class="section-subtitle">Interactive leaderboard from the paper's main table. You can switch interface mode, category, and sorting metric. To update results later, edit only the <code>leaderboardData</code> array in script.</p>
+
+      <div class="lb-toolbar">
+        <div class="lb-control">
+          <label for="lbModeFilter">Interface Mode</label>
+          <select id="lbModeFilter">
+            <option value="all">All</option>
+            <option value="Gen">Gen (Code)</option>
+            <option value="Atm">Atm (Atomic)</option>
+            <option value="--">No Tool / Human</option>
+          </select>
+        </div>
+        <div class="lb-control">
+          <label for="lbCategoryFilter">Model Category</label>
+          <select id="lbCategoryFilter">
+            <option value="all">All</option>
+            <option value="Human">Human</option>
+            <option value="No Tool">No Tool</option>
+            <option value="Open Source">Open Source</option>
+            <option value="Closed Source">Closed Source</option>
+          </select>
+        </div>
+        <div class="lb-control">
+          <label for="lbSortMetric">Sort By</label>
+          <select id="lbSortMetric">
+            <option value="overallAcc">Overall Acc</option>
+            <option value="l1Acc">Level-1 Acc</option>
+            <option value="l2Acc">Level-2 Acc</option>
+            <option value="l3Acc">Level-3 Acc</option>
+            <option value="overallS">Overall S</option>
+            <option value="overallV">Overall V</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="lb-table-wrap">
+        <table class="lb-table">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Mode</th>
+              <th>Category</th>
+              <th>Overall Acc</th>
+              <th>L1 Acc</th>
+              <th>L2 Acc</th>
+              <th>L3 Acc</th>
+              <th>Overall S</th>
+              <th>Overall V</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboardBody"></tbody>
+        </table>
+      </div>
+      <p class="lb-note">Note: values are copied from Table 3 (paper). Human and no-tool settings do not have process scores, shown as “—”.</p>
+    </section>
+
+    <section id="cases">
+      <h2 class="section-title">Case Gallery</h2>
+      <p class="section-subtitle">Representative appendix cases across Level-1/2/3, covering core visual expansion, short multi-step workflows, and advanced synergistic reasoning. To update later, edit only the <code>caseData</code> array.</p>
+
+      <div class="case-filter" id="caseFilter">
+        <button type="button" class="active" data-level="all">All Levels</button>
+        <button type="button" data-level="1">Level 1</button>
+        <button type="button" data-level="2">Level 2</button>
+        <button type="button" data-level="3">Level 3</button>
+      </div>
+
+      <div class="case-grid" id="caseGrid"></div>
+    </section>
+
     <section id="dataset">
       <h2 class="section-title">Dataset and Annotation</h2>
       <p class="section-subtitle">Agentic-MME emphasizes human-supervised process labels to support robust and explainable benchmark diagnostics.</p>
@@ -663,6 +996,216 @@
   </footer>
 
   <script>
+    // ======================
+    // 1) Easy-to-update data
+    // ======================
+    const leaderboardData = [
+      { model: 'Human', mode: '--', category: 'Human', overallAcc: 93.8, l1Acc: 99.0, l2Acc: 92.6, l3Acc: 82.3, overallS: null, overallV: null },
+      { model: 'Gemini 3 pro-preview', mode: '--', category: 'No Tool', overallAcc: 30.2, l1Acc: 42.9, l2Acc: 24.6, l3Acc: 7.5, overallS: null, overallV: null },
+
+      { model: 'Qwen3-VL-235B', mode: 'Gen', category: 'Open Source', overallAcc: 28.5, l1Acc: 43.9, l2Acc: 23.3, l3Acc: 2.5, overallS: 20.8, overallV: 17.3 },
+      { model: 'Qwen3-VL-235B', mode: 'Atm', category: 'Open Source', overallAcc: 34.9, l1Acc: 50.0, l2Acc: 26.9, l3Acc: 10.1, overallS: 20.5, overallV: 35.7 },
+      { model: 'Qwen3-VL-32B-think', mode: 'Gen', category: 'Open Source', overallAcc: 27.4, l1Acc: 42.2, l2Acc: 19.5, l3Acc: 4.6, overallS: 8.7, overallV: 36.5 },
+      { model: 'Qwen3-VL-32B-think', mode: 'Atm', category: 'Open Source', overallAcc: 29.9, l1Acc: 46.3, l2Acc: 22.5, l3Acc: 4.6, overallS: 9.8, overallV: 12.7 },
+      { model: 'Qwen3-VL-8B-think', mode: 'Gen', category: 'Open Source', overallAcc: 26.3, l1Acc: 40.4, l2Acc: 17.3, l3Acc: 9.1, overallS: 10.3, overallV: 22.2 },
+      { model: 'Qwen3-VL-8B-think', mode: 'Atm', category: 'Open Source', overallAcc: 26.6, l1Acc: 45.6, l2Acc: 16.5, l3Acc: 3.3, overallS: 10.2, overallV: 12.3 },
+      { model: 'Deepeyesv2', mode: 'Gen', category: 'Open Source', overallAcc: 22.5, l1Acc: 34.3, l2Acc: 13.5, l3Acc: 7.5, overallS: 4.5, overallV: 12.9 },
+      { model: 'Deepeyesv2', mode: 'Atm', category: 'Open Source', overallAcc: 25.2, l1Acc: 38.9, l2Acc: 17.0, l3Acc: 3.8, overallS: 5.1, overallV: 26.5 },
+      { model: 'Thyme-rl', mode: 'Gen', category: 'Open Source', overallAcc: 18.0, l1Acc: 27.7, l2Acc: 10.5, l3Acc: 6.2, overallS: 0.4, overallV: 36.9 },
+      { model: 'Thyme-rl', mode: 'Atm', category: 'Open Source', overallAcc: 23.0, l1Acc: 32.4, l2Acc: 20.7, l3Acc: 2.5, overallS: 1.8, overallV: 25.1 },
+
+      { model: 'Gemini 3 pro-preview', mode: 'Gen', category: 'Closed Source', overallAcc: 49.5, l1Acc: 64.8, l2Acc: 41.8, l3Acc: 23.0, overallS: 29.7, overallV: 45.8 },
+      { model: 'Gemini 3 pro-preview', mode: 'Atm', category: 'Closed Source', overallAcc: 56.3, l1Acc: 70.6, l2Acc: 47.4, l3Acc: 33.3, overallS: 29.0, overallV: 64.1 },
+      { model: 'Gemini 3-flash', mode: 'Gen', category: 'Closed Source', overallAcc: 47.7, l1Acc: 62.8, l2Acc: 40.0, l3Acc: 21.6, overallS: 27.3, overallV: 51.0 },
+      { model: 'Gemini 3-flash', mode: 'Atm', category: 'Closed Source', overallAcc: 52.2, l1Acc: 67.6, l2Acc: 43.8, l3Acc: 27.2, overallS: 26.4, overallV: 59.4 },
+      { model: 'Qwen3.5-plus', mode: 'Gen', category: 'Closed Source', overallAcc: 44.5, l1Acc: 62.1, l2Acc: 39.8, l3Acc: 18.3, overallS: 27.3, overallV: 45.0 },
+      { model: 'Qwen3.5-plus', mode: 'Atm', category: 'Closed Source', overallAcc: 47.1, l1Acc: 61.8, l2Acc: 39.6, l3Acc: 22.8, overallS: 29.0, overallV: 58.8 },
+      { model: 'Kimi-k2.5', mode: 'Gen', category: 'Closed Source', overallAcc: 35.0, l1Acc: 50.8, l2Acc: 29.0, l3Acc: 8.8, overallS: 28.0, overallV: 16.8 },
+      { model: 'Kimi-k2.5', mode: 'Atm', category: 'Closed Source', overallAcc: 44.0, l1Acc: 61.7, l2Acc: 39.0, l3Acc: 20.9, overallS: 26.2, overallV: 47.3 },
+      { model: 'GPT 5-mini', mode: 'Gen', category: 'Closed Source', overallAcc: 33.5, l1Acc: 47.8, l2Acc: 29.2, l3Acc: 8.2, overallS: 22.3, overallV: 56.1 },
+      { model: 'GPT 5-mini', mode: 'Atm', category: 'Closed Source', overallAcc: 37.7, l1Acc: 50.5, l2Acc: 31.9, l3Acc: 14.3, overallS: 20.8, overallV: 53.1 },
+      { model: 'GPT 5.2', mode: 'Gen', category: 'Closed Source', overallAcc: 31.2, l1Acc: 45.3, l2Acc: 24.6, l3Acc: 13.5, overallS: 20.3, overallV: 10.4 },
+      { model: 'GPT 5.2', mode: 'Atm', category: 'Closed Source', overallAcc: 35.0, l1Acc: 49.0, l2Acc: 26.1, l3Acc: 16.7, overallS: 17.4, overallV: 58.1 }
+    ];
+
+    const caseData = [
+      {
+        id: 'Case L1-A',
+        level: 1,
+        title: 'Text Extraction via Localized Enhancement',
+        desc: 'A small blurry text region must be isolated and enhanced before it becomes reliably readable.',
+        image: 'assets/cases/l1_text_extraction.png'
+      },
+      {
+        id: 'Case L1-B',
+        level: 1,
+        title: 'Fine-grained Detail Isolation',
+        desc: 'The agent tightly isolates a distant person to recover subtle spatial attributes hidden in the raw image.',
+        image: 'assets/cases/l1_detail_isolation.png'
+      },
+      {
+        id: 'Case L2-A',
+        level: 2,
+        title: 'Multi-region Counting + Arithmetic Composition',
+        desc: 'Multiple localized inspections are aggregated into a final answer through short-horizon bookkeeping.',
+        image: 'assets/cases/l2_multiregion_counting.png'
+      },
+      {
+        id: 'Case L2-B',
+        level: 2,
+        title: 'Region-Constrained Counting with Temporal Arithmetic',
+        desc: 'The workflow chains region filtering, constrained counting, and time-based computation.',
+        image: 'assets/cases/l2_temporal_arithmetic.png'
+      },
+      {
+        id: 'Case L3-A',
+        level: 3,
+        title: 'Cross-image Spatial Grounding + Knowledge Verification',
+        desc: 'Evidence is linked across map and street-view images, then validated with external web knowledge.',
+        image: 'assets/cases/l3_cross_image_grounding.png'
+      },
+      {
+        id: 'Case L3-B',
+        level: 3,
+        title: 'Full-image Structural Analysis',
+        desc: 'The agent reasons over global repetitive structure to infer latent patterns and derive a numeric answer.',
+        image: 'assets/cases/l3_structural_analysis.png'
+      },
+      {
+        id: 'Case L3-C',
+        level: 3,
+        title: 'Cross-domain Multi-hop Verification',
+        desc: 'Weak visual hints trigger visual search and multi-hop retrieval before final cross-validation.',
+        image: 'assets/cases/l3_multihop_verification.png'
+      },
+      {
+        id: 'Case L3-D',
+        level: 3,
+        title: 'Multi-step Counting with External Knowledge',
+        desc: 'Several targeted crops are fused with external team-identity knowledge for exclusion-based counting.',
+        image: 'assets/cases/l3_counting_with_knowledge.png'
+      }
+    ];
+
+    // ======================
+    // 2) Leaderboard render
+    // ======================
+    const leaderboardBody = document.getElementById('leaderboardBody');
+    const lbModeFilter = document.getElementById('lbModeFilter');
+    const lbCategoryFilter = document.getElementById('lbCategoryFilter');
+    const lbSortMetric = document.getElementById('lbSortMetric');
+
+    const categoryClassMap = {
+      Human: 'cat-human',
+      'No Tool': 'cat-no-tool',
+      'Open Source': 'cat-open',
+      'Closed Source': 'cat-closed'
+    };
+
+    function metricCell(value) {
+      if (value === null || Number.isNaN(value)) {
+        return '<span class="muted">—</span>';
+      }
+      return value.toFixed(1);
+    }
+
+    function renderLeaderboard() {
+      const modeValue = lbModeFilter.value;
+      const categoryValue = lbCategoryFilter.value;
+      const sortMetric = lbSortMetric.value;
+
+      const filtered = leaderboardData
+        .filter((row) => (modeValue === 'all' ? true : row.mode === modeValue))
+        .filter((row) => (categoryValue === 'all' ? true : row.category === categoryValue))
+        .sort((a, b) => {
+          const av = a[sortMetric];
+          const bv = b[sortMetric];
+          if (av === null && bv === null) return a.model.localeCompare(b.model);
+          if (av === null) return 1;
+          if (bv === null) return -1;
+          if (bv !== av) return bv - av;
+          return a.model.localeCompare(b.model);
+        });
+
+      leaderboardBody.innerHTML = filtered.map((row) => {
+        const modeClass = row.mode === '--' ? 'mode-pill mode-none' : 'mode-pill';
+        const categoryClass = categoryClassMap[row.category] || '';
+        return `
+          <tr>
+            <td>${row.model}</td>
+            <td><span class="${modeClass}">${row.mode}</span></td>
+            <td><span class="cat-pill ${categoryClass}">${row.category}</span></td>
+            <td>${metricCell(row.overallAcc)}</td>
+            <td>${metricCell(row.l1Acc)}</td>
+            <td>${metricCell(row.l2Acc)}</td>
+            <td>${metricCell(row.l3Acc)}</td>
+            <td>${metricCell(row.overallS)}</td>
+            <td>${metricCell(row.overallV)}</td>
+          </tr>
+        `;
+      }).join('');
+
+      if (!filtered.length) {
+        leaderboardBody.innerHTML = `
+          <tr>
+            <td colspan="9" class="muted" style="text-align:center;padding:16px 10px;">
+              No rows matched current filters.
+            </td>
+          </tr>
+        `;
+      }
+    }
+
+    [lbModeFilter, lbCategoryFilter, lbSortMetric].forEach((el) => {
+      el.addEventListener('change', renderLeaderboard);
+    });
+
+    // ======================
+    // 3) Case gallery render
+    // ======================
+    const caseGrid = document.getElementById('caseGrid');
+    const caseFilterButtons = [...document.querySelectorAll('#caseFilter button')];
+    let currentCaseLevel = 'all';
+
+    function renderCases() {
+      const rows = caseData.filter((row) => (currentCaseLevel === 'all' ? true : String(row.level) === currentCaseLevel));
+      if (!rows.length) {
+        caseGrid.innerHTML = '<div class="case-empty">No case is available for this filter.</div>';
+        return;
+      }
+
+      caseGrid.innerHTML = rows.map((row) => `
+        <article class="case-card">
+          <div class="case-image-wrap">
+            <img src="${row.image}" alt="${row.title}">
+          </div>
+          <div class="case-body">
+            <div class="case-top">
+              <span class="case-level level-${row.level}">Level ${row.level}</span>
+              <span class="case-id">${row.id}</span>
+            </div>
+            <h4 class="case-title">${row.title}</h4>
+            <p class="case-desc">${row.desc}</p>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    caseFilterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        currentCaseLevel = button.dataset.level;
+        caseFilterButtons.forEach((x) => x.classList.remove('active'));
+        button.classList.add('active');
+        renderCases();
+      });
+    });
+
+    renderLeaderboard();
+    renderCases();
+
+    // ======================
+    // 4) Header navigation
+    // ======================
     const sections = [...document.querySelectorAll('main section')];
     const navLinks = [...document.querySelectorAll('.nav-links a')];
 
